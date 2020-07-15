@@ -1,0 +1,161 @@
+JAVA SCRIPT ASSIGNMENT-1
+
+Q.1) Explain various methods in console unction.
+Ans)
+
+ Syntax:
+console.log(obj1 [, obj2, ..., objN]);
+console.log(msg [, subst1, ..., substN]);
+Parameters
+obj1 ... objN
+A list of JavaScript objects to output. The string representations of each of these objects are appended together in the order listed and output. Please be warned that if you log objects in the latest versions of Chrome and Firefox what you get logged on the console is a reference to the object, which is not necessarily the 'value' of the object at the moment in time you call console.log(), but it is the value of the object at the moment you open the console.
+msg
+A JavaScript string containing zero or more substitution strings.
+subst1 ... substN
+JavaScript objects with which to replace substitution strings within msg. This gives you additional control over the format of the output.
+console.table(data[, properties])??
+While debugging, if there is a complex nested object or an array of objects of the same type, we face difficulty in reading, understanding, and comparing objects.
+console.table() is here to rescue us. It presents the data in a clear tabular format. Hence, improving the readability.
+The method takes two arguments:
+data: a collection of data with any type, usually an array of objects.
+properties: an array of strings of the fields you want to use to display the table.
+Let’s understand more with an example:
+const data = [
+  {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 0.55,
+  },
+  {
+    "id": "0002",
+    "type": "donut",
+    "name": "Raised",
+    "ppu": 0.55,
+  }
+];
+We have an array of objects data. Let’s see the table method output for our data.
+
+
+console.table(data)
+2. console.table(data, ['name'])
+
+console.table(data, ['name'])
+Try the same with the nested object and see the output 
+Notes: You can sort the table by a column by clicking on that column’s label.
+3. console.group(label) & console.groupEnd(label)
+Sometimes, there may be a scenario where we want to log values within a loop. The best thing to do will be to add a separator at the end of each loop to separate the values of each iteration, but that is still not efficient enough since there are no labels to describe the logs.
+With console.group it becomes really simple to properly organize related data and represent each group with a definitive group label while logging to the console.
+The methods take an optional argument — label which is the name of the group.
+Although it’s not required to pass an argument to console.group(), still, we should do it in order to clarify what values are being grouped together.
+We don't have to pass the group name to console.groupEnd() because it will always close the recently created group.
+We can also create nested groups if we call console.group() inside an already created group. 
+Notes: Groups created by console.group(label) are initially opened, we can display the group as collapsed from the outset if we call console.groupCollapsed(label). Here’s an example:
+
+console.groupCollapsed(label)
+4.console.dir(object) & console.dirxml(object)
+In the past, the behavior between console.log and console.dir was quite different, particularly when logging object contents, but the newer JavaScript engines have expanded the functionality of console.log so there isn’t much difference from console.dir anymore.
+The only difference that I found is when accessing the DOM element in the browser console.
+console.log prints the element in an HTML-like tree
+console.dir prints the element in a JSON-like tree from where we can inspect the element DOM properties
+Difference between console.log() and console.dir()
+In the case of Node.js, the console.dir(obj[, options]) function takes an optional argument which is an object that can have the following keys:
+showHidden <boolean>. If true then the object's non-enumerable and symbol properties will be shown too. Default: false.
+depth <number>. Tells how many times to recurse while formatting the object. This is useful for inspecting large complicated objects. To make it recurse indefinitely, pass null. Default: 2.
+colors <boolean>. If true, then the output will be styled with ANSI color codes. Colors are customizable. Default: false.
+Note: If you know more differences, pls feel free to comment down below with examples??
+Calling console.dirxml() on HTML and XML elements or an object is equivalent to calling console.log()
+Note: Inside Node.js console.dirxml also calls console.log for its arguments.
+
+5.Difference between console.log() and console.dirxml()
+console.profile([, label]) & console.profileEnd([, label])??
+console.profile([,label]) starts to record a performance profile of the CPU and memory usage where it is called (Browser or Node.js).
+Each run of the profiler is saved as a separate tab identified by the label passed as an argument.
+Remember to end profiling using the console.profileEnd(label).
+
+This creates a JavaScript profiler with a name test1 and starts recording the performance of the browser (assuming it ran in browser). To see the recorded performance in the case of the Chrome browser.
+
+6.console.profile([, label]) & console.profileEnd([, label])
+Note: If you don’t see JavaScript profiler panel in the developer tools then follow this —Click three dots menu (in the top right corner) ?-> More tools -> JavaScript Profiler.
+In the case of Node.js, the method does not display anything unless used in the inspector. Stops the current JavaScript CPU profiling session if one has been started and prints the report to the Profiles panel of the inspector.
+If console.profileEnd() method is called without a label, the most recently started profile is stopped.
+Note: This feature is non-standard and is not on a standards track. Do not use it on production sites facing the Web.
+console.time([, label]) & console.timeEnd([, label])??
+console.time() starts a timer that can be used to compute the duration of an operation. console.timeEnd() stops the timer and print total run time in milliseconds.
+Timers are identified by a unique label and if not specified, the timeEnd will take the most recent time function and stop it.
+They are mostly used when you need to do a performance check of a piece of code. You can also pass a string to time and timeEnd and it will start another timer of that name.
+
+7.console.time([, label]) & console.timeEnd([, label])
+The time it took for the loop to finish is 0.01708984375ms.
+Note: Check out this performance analysis open-source code solely made using the above two functions.
+console.count([, label]) & console.countReset([, label])??
+console.count([,label]) places a counter on the label passed as an argument. Each time it is called, the value of the counter is increased. A label together with a number is displayed in the debugging console and if label is not passed, console.count() will log the number of times it has been invoked at that time with the default as a label like this:
+[label]: X    //when label is passed
+default: X    //when label is not passed
+console.countReset() will reset the value of count and if it is used with the parameter label then it will reset the value of the count of that particular label.
+
+8. console.count([, label]) & console.countReset([, label])
+In the above example, when we reset the value of the counter using console.countReset()and again made a call to console.count()method, we see that it return the counter 1 as it called once.
+Also, notice the difference between the call to these methods with or without a label. 
+console.assert(expression, message)??
+The method is used to run simple assertion tests. It takes two required arguments:
+expression: A boolean expression.
+message: A string or an object which is written to the console.
+Note: If an expression is false, it will write a message to the console and throw an exception. If it is true then it will do nothing.
+
+console.assert(expression, message)
+console.trace([,data])??
+Sometimes, while debugging the complex function calls, we get stuck in the situation of detecting the callable function and its parameter values. This is whereconsole.trace() comes into picture and prints the stack trace of callable functions to the console from the point it is called.
+
+console.trace([,data])
+Note: An instance where this can be used is tracing the stack when an exception is thrown in Node.js or when we are debugging a function in the browser.
+
+
+Q.2)write a dirence between var,let and const with example code.
+ans)Var
+The JavaScript variables statement is used to declare a variable and, optionally, we can initialize the value of that variable.
+function nodeSimplified(){
+  var a =10;
+  console.log(a);  // output 10
+  if(true){
+   var a=20;
+   console.log(a); // output 20
+  }
+  console.log(a);  // output 20
+}
+2.) let
+The let statement declares a local variable in a block scope. It is similar to var, in that we can optionally initialize the variable.
+
+Example: let a =10;
+function nodeSimplified(){
+  let a =10;
+  console.log(a);  // output 10
+  if(true){
+   let a=20;
+   console.log(a); // output 20
+  }
+  console.log(a);  // output 10
+}
+3.)const
+const statement values can be assigned once and they cannot be reassigned. The scope of const statement works similar to let statements.
+
+Example: const a =10;
+
+function nodeSimplified(){
+  const MY_VARIABLE =10;
+  console.log(MY_VARIABLE);  //output 10 
+}
+
+Q.3)write a brie intoduction on available data type in js.
+ans.) Data types are used to classify one particular type of data in programming languages. For instance, a number and a string of characters are different types of data that will be treated differently by JavaScript.
+This is important because the specific data type you use will determine what values you can assign to it and what you can do to it. This is to say, to be able to do operations with variables in JavaScript, it is important to understand the data type of any given variable.
+Primitive Data Types
+1.String
+2.Number
+3.Boolean
+4.Null
+Undefined
+Non-primitive Data Type
+1.Object
+2.Date
+3.Array
